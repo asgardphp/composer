@@ -10,34 +10,59 @@ class BundleInstaller extends LibraryInstaller {
 	* {@inheritDoc}
 	*/
 	public function install(InstalledRepositoryInterface $repo, PackageInterface $package) {
-		parent::install($repo, $package);
-
-		require_once 'autoload.php';
-
-		$kernel = new \Kernel();
-		$kernel->load();
-		$cbi = $kernel->getContainer()['composerBundleInstaller'];
-		$cbi->install($package);
+		if(file_exists('composer/install.php'))
+			require 'composer/install.php';
+		else
+			parent::install($repo, $package);
 	}
 
 	/**
 	* {@inheritDoc}
 	*/
 	public function update(InstalledRepositoryInterface $repo, PackageInterface $initial, PackageInterface $target) {
-		parent::update($repo, $initial, $target);
+		if(file_exists('composer/update.php'))
+			require 'composer/update.php';
+		else
+			parent::update($repo, $initial, $target);
+	}
 
-		require_once 'autoload.php';
+	/**
+	* {@inheritDoc}
+	*/
+	public function uninstall(InstalledRepositoryInterface $repo, PackageInterface $package) {
+		if(file_exists('composer/uninstall.php'))
+			require 'composer/uninstall.php';
+		else
+			parent::uninstall($repo, $package);
+	}
 
-		$kernel = new \Kernel();
-		$kernel->load();
-		$cbi = $kernel->getContainer()['composerBundleInstaller'];
-		$cbi->update($package);
+	/**
+	* {@inheritDoc}
+	*/
+	public function getInstallPath(PackageInterface $package) {
+		if(file_exists('composer/getInstallPath.php'))
+			return require 'composer/getInstallPath.php';
+		else
+			return parent::getInstallPath($package);
+	}
+
+	/**
+	* {@inheritDoc}
+	*/
+	public function isInstalled(InstalledRepositoryInterface $repo, PackageInterface $package) {
+		if(file_exists('composer/isInstalled.php'))
+			return require 'composer/isInstalled.php';
+		else
+			return parent::isInstalled($repo, $package);
 	}
 
 	/**
 	* {@inheritDoc}
 	*/
 	public function supports($packageType) {
-		return $packageType == 'asgard-bundle';
+		if(file_exists('composer/supports.php'))
+			return require 'composer/supports.php';
+		else
+			return true;
 	}
 }

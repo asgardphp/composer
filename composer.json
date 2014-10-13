@@ -1,14 +1,18 @@
 {
-	"name": "asgard/composer",
-	"type": "composer-plugin",
-	"license": "MIT",
-	"autoload": {
-		"psr-4": {"Asgard\\Composer\\": "."}
-	},
-	"extra": {
-	   "class": "Asgard\\Composer\\BundleInstallerPlugin"
-	},
-	"require": {
-		"composer-plugin-api": "1.0.0"
-	}
+    "name": "asgard/composer",
+    "type": "composer-plugin",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {"Asgard\\Composer\\": "."}
+    },
+    "require": {
+        "composer-plugin-api": "1.0.0"
+    },
+    "minimum-stability": "dev",
+    "extra": {
+       "class": "Asgard\\Composer\\BundleInstallerPlugin",
+        "branch-alias": {
+            "dev-master": "0.2-dev"
+        }
+    }
 }

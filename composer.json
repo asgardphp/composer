@@ -6,7 +6,7 @@
         "psr-4": {"Asgard\\Composer\\": "."}
     },
     "require": {
-        "composer-plugin-api": "1.0.0"
+        "composer-plugin-api": "^1.0"
     },
     "minimum-stability": "dev",
     "extra": {
